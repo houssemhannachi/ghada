@@ -31,3 +31,11 @@
     background-color: orange; // Change en orange au survol
     color: white;
 }
+
+.postuler-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #ccc; /* or any color you want */
+  color: #666; /* optional: change text color */
+  border-color: #aaa; /* optional: adjust border if needed */
+}

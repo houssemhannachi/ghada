@@ -9,6 +9,7 @@ import { HeaderComponent } from '../layouts/header/header.component';
 import { StudentHeaderComponent } from '../layouts/student-header/student-header.component';
 import { SharedModule } from '../shared/module/shared.module';
 import { FooterTopContainerComponent } from '../layouts/footer/footer-top-container/footer-top-container.component';
+import {ModeratorHeaderComponent} from "../layouts/moderator-header/moderator-header.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FooterTopContainerComponent } from '../layouts/footer/footer-top-contai
     HeaderComponent,
     FooterComponent,
     AdminHeaderComponent,
+    ModeratorHeaderComponent,
     StudentHeaderComponent,
     FooterTopContainerComponent
   ],

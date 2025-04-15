@@ -129,24 +129,24 @@
             <li class="nav-item">
               <div>
                 <!-- Dark Mode Toggle -->
-                <a href="javascript:void(0)" 
-                   id="dark-mode-toggle" 
-                   [class.activate]="!showDark" 
-                   class="dark-mode-toggle " 
+                <a href="javascript:void(0)"
+                   id="dark-mode-toggle"
+                   [class.activate]="!showDark"
+                   class="dark-mode-toggle "
                    (click)="themeChange()">
                   <i *ngIf="!showDark" class="fa-solid fa-moon"></i>
                 </a>
-              
+
                 <!-- Light Mode Toggle -->
                 <a href="javascript:void(0)"
-                   id="light-mode-toggle" 
-                   class="dark-mode-toggle" 
-                   [class.activate]="showDark" 
+                   id="light-mode-toggle"
+                   class="dark-mode-toggle"
+                   [class.activate]="showDark"
                    (click)="themeChange()">
                   <i *ngIf="showDark" class="fa-solid fa-sun"></i>
                 </a>
               </div>
-            </li>	
+            </li>
             <li class="nav-item">
               <a class="nav-link header-sign" [routerLink]="routes.login">Signin</a>
             </li>

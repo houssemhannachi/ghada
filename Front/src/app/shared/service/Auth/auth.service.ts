@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,29 +8,80 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private baseUrl = 'http://localhost:8076';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    console.log('Token envoyé:', token);
+
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': ` Bearer ${token}`
+    });
+  }
 
   register(userData: any): Observable<any> {
-      console.log('📤 Données envoyées depuis AuthService:', userData);
+    console.log('📤 Données envoyées depuis AuthService:', userData);
 
-      return this.http.post(`${this.baseUrl}/auth/register`, userData);
-    }
+    return this.http.post(`${this.baseUrl}/auth/register`, userData);
+  }
 
-
+  logOut(){
+    localStorage.removeItem("token");
+  }
 
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/login`, credentials);
   }
 
   refreshToken(token: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/refresh`, { token });
+    return this.http.post(`${this.baseUrl}/refresh`, {token});
   }
 
   forgotPassword(email: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/forget-password`, { email });
+    return this.http.post(`${this.baseUrl}/forget-password`, {email});
   }
 
   resetPassword(token: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/reset-password?token=${token}`, { password });
+    return this.http.post(`${this.baseUrl}/reset-password?token=${token}`, {password});
+  }
+
+  // 🔹 Nouvelle fonction pour récupérer les données utilisateur
+  getProfile(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`  // Ajouter le token dans l'en-tête Authorization
+    });
+    return this.http.get(`${this.baseUrl}/adminuser/get-profile`, {headers});
+  }
+
+  isAdmin(): Observable<boolean> {
+    return this.getProfile().pipe(
+      map(profile => profile?.ourUsers.role === 'ADMIN')
+    );
+  }
+  isStudent(): Observable<boolean> {
+    return this.getProfile().pipe(
+      map(profile => profile?.ourUsers.role === 'USER')
+    );
+  }
+  isModerator(): Observable<boolean> {
+    return this.getProfile().pipe(
+      map(profile => profile?.ourUsers.role === 'MODERATOR')
+    );
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.getProfile();
+  }
+
+  // Méthode pour récupérer la liste des modérateurs
+  getAllModerators(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/admin/get-all-moderators`); // Effectuer une requête GET
   }
 }

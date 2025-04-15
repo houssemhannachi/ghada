@@ -12,14 +12,18 @@
      showDark === true,
   }"
   >
-  @if (isuserHeader === true) {
+  @if (!isLoggedIn) {
     <app-header></app-header>
+  }
+
+  @if (isModeratorHeader) {
+    <app-moderator-header></app-moderator-header>
   }
 
   @if (isAdminHeader) {
     <app-admin-header></app-admin-header>
   }
-  @if (isstudentHeader === true) {
+  @if (isStudentHeader) {
     <app-student-header></app-student-header>
   }
   <div>

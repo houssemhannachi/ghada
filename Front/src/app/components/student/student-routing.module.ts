@@ -14,6 +14,8 @@ import { StudentReviewsComponent } from './student-reviews/student-reviews.compo
 import { StudentReferralComponent } from './student-referral/student-referral.component';
 import { StudentTicketsComponent } from './student-tickets/student-tickets.component';
 import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz-details.component';
+import {InstructorSujetDetails} from "../instructor/sujet-details/instructor-sujet-details";
+import {StudentSujetDetails} from "./student-sujet-details/student-sujet-details";
 
 const routes: Routes = [
   {
@@ -42,6 +44,10 @@ const routes: Routes = [
       {
         path: 'student-order-history',
         component: StudentOrderHistoryComponent,
+      },
+      {
+        path: 'sujet-details/:id',
+        component: StudentSujetDetails,
       },
       { path: 'listsujets-moderator', component: ListsujetsModeratorComponent },
       { path: 'sujetpfe-user', component: SujetpfeFrontoffice },

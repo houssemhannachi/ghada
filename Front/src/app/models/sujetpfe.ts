@@ -8,7 +8,7 @@ export interface SujetPfe {
     image?: string;
     demandeStatus: DemandeStatus;
     moderator: OurUsers | null;
-    userAttribue: OurUsers | null; 
+    userAttribue: OurUsers | null;
     demandeurs: OurUsers[];
 }
 

@@ -22,6 +22,7 @@ public class OurUsers implements UserDetails {
     private String name;
     private String password;
     private String city;
+    @Column(columnDefinition = "LONGTEXT")
     private String image;
     private Long numTel;
     private Long CIN;
@@ -39,7 +40,8 @@ public class OurUsers implements UserDetails {
     @JsonIgnore
     @ManyToMany(mappedBy = "demandeurs")
     private List<SujetPfe> sujetsPostules; // Liste des sujets postulés par l'utilisateur
-//
+
+    //
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

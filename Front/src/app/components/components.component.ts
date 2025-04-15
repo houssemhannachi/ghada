@@ -3,6 +3,7 @@ import { NavigationStart, Router, Event as RouterEvent } from '@angular/router';
 import { CommonService } from '../shared/service/common/common.service';
 import { SidebarService } from '../shared/service/sidebar/sidebar.service';
 import { url } from '../models/model';
+import {AuthService} from "../shared/service/Auth/auth.service";
 
 @Component({
   selector: 'app-components',
@@ -14,11 +15,12 @@ export class ComponentsComponent {
   base = '';
   page = '';
   last = '';
-  public isuserHeader!: boolean;
+  public isModeratorHeader!: boolean;
   public themeMode: string = '';
   public darkTheme = false;
   public isAdminHeader!: boolean;
-  public isstudentHeader!: boolean;
+  public isStudentHeader!: boolean;
+  public isLoggedIn!: boolean;
   public showDark = false;
   public mainFooter!: boolean;
   public routeStatus!: string;
@@ -27,7 +29,8 @@ export class ComponentsComponent {
   constructor(
     private Router: Router,
     private sidebar: SidebarService,
-    private common: CommonService
+    private common: CommonService,
+    private authService:AuthService
   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
@@ -47,15 +50,16 @@ export class ComponentsComponent {
 
     this.setRouting(this.Router);
 
-    this.common.isAdminHeader.subscribe((res: boolean) => {
+    this.authService.isAdmin().subscribe((res: boolean) => {
       this.isAdminHeader = res;
     });
-    this.common.isuserHeader.subscribe((res: boolean) => {
-      this.isuserHeader = res;
+    this.authService.isModerator().subscribe((res: boolean) => {
+      this.isModeratorHeader = res;
     });
-    this.common.isstudentHeader.subscribe((res: boolean) => {
-      this.isstudentHeader = res;
+    this.authService.isStudent().subscribe((res: boolean) => {
+      this.isStudentHeader = res;
     });
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.common.mainFooter.subscribe((res: boolean) => {
       this.mainFooter = res;
     });
@@ -83,7 +87,7 @@ export class ComponentsComponent {
             document.body.classList.remove('dark');
           }
     });
-   
+
   }
 
   private setRouting(data: url): void {
@@ -133,5 +137,5 @@ export class ComponentsComponent {
       this.common.isAdminHeader.next(true);
     }
   }
- 
+
 }

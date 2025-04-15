@@ -10,10 +10,6 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class SujetPfe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +24,10 @@ public class SujetPfe {
 
     @NotBlank(message = "La technologie est obligatoire")
     private String technologie;
+    @Column(columnDefinition = "LONGTEXT")
     private String image;
-    private String rapport;
+    @Lob
+    private byte[] rapport;
     @Enumerated(EnumType.STRING)
     private DemandeStatus demandeStatus;
 

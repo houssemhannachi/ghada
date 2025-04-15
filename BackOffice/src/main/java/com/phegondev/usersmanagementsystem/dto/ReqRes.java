@@ -45,7 +45,7 @@ public class ReqRes {
     private String image;
 
     @Positive(message = "Le numéro de téléphone doit être un nombre positif")
-    @Min(value = 100000000, message = "Le numéro de téléphone doit contenir au moins 9 chiffres")
+    @Min(value = 10000000, message = "Le numéro de téléphone doit contenir au moins 8 chiffres")
     private long numTel;
 
     @Positive(message = "Le CIN doit être un nombre positif")

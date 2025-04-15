@@ -1,17 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { SujetPfe } from 'src/app/models/sujetpfe';
-import { OurUsers } from 'src/app/models/users';
+import {HttpClient} from '@angular/common/http';
+import {Injectable, Optional} from '@angular/core';
+import {Observable} from 'rxjs';
+import {SujetPfe} from 'src/app/models/sujetpfe';
+import {OurUsers} from 'src/app/models/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SujetPfeService {
-  
+
   private baseUrl: string = 'http://localhost:8076/api/sujets';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   // Ajouter un sujet
   ajouterSujet(sujetPfe: SujetPfe): Observable<SujetPfe> {
@@ -48,6 +49,10 @@ export class SujetPfeService {
     return this.http.post<SujetPfe>(`${this.baseUrl}/postuler/${sujetPfeId}/${userId}`, {});
   }
 
+  couldPostulate(userId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/could-postulate/${userId}`, {});
+  }
+
   // Accepter une postulation
   accepterPostulation(sujetPfeId: number, userId: number): Observable<SujetPfe> {
     return this.http.put<SujetPfe>(`${this.baseUrl}/accepter/${sujetPfeId}/${userId}`, {});
@@ -74,13 +79,14 @@ export class SujetPfeService {
   getSujetsNonPostules(userId: number): Observable<SujetPfe[]> {
     return this.http.get<SujetPfe[]>(`${this.baseUrl}/sujets-non-postules/${userId}`);
   }
-  
+
   uploadRapport(sujetPfeId: number, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);
-  
+
     return this.http.post(`${this.baseUrl}/${sujetPfeId}/upload`, formData);
   }
+
   getSujetsByModerator(moderatorId: number): Observable<SujetPfe[]> {
     return this.http.get<SujetPfe[]>(`${this.baseUrl}/moderateur/${moderatorId}`);
   }
@@ -88,6 +94,11 @@ export class SujetPfeService {
   getPourcentageSujetsAttribues(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/pourcentage-attribues`);
   }
-  
-  
+
+  getStudentAffectedToPfe(pfeId: number): Observable<OurUsers> {
+    return this.http.get<OurUsers>(`${this.baseUrl}/student-affected-to-subjet/${pfeId}`);
+
+  }
+
+
 }

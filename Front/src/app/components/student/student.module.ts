@@ -20,6 +20,8 @@ import { StudentTicketsComponent } from './student-tickets/student-tickets.compo
 import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz-details.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {StudentSujetDetails} from "./student-sujet-details/student-sujet-details";
+import {InstructorModule} from "../instructor/instructor.module";
 
 
 
@@ -37,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StudentReviewsComponent,
     StudentReferralComponent,
     StudentTicketsComponent,
-    StudentQuizDetailsComponent
+    StudentQuizDetailsComponent,
+    StudentSujetDetails
   ],
   imports: [
     CommonModule,
@@ -45,6 +48,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FeatherIconModule,
     SharedModule,
     RouterModule,
+    InstructorModule,
   ],
   exports: [
     ToastrModule // Export pour utilisation dans d'autres modules

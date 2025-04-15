@@ -16,7 +16,6 @@ import { InstructorWithdrawComponent } from './instructor-withdraw/instructor-wi
 import { InstructorTicketsComponent } from './instructor-tickets/instructor-tickets.component';
 import { InstructorOrdersComponent } from './instructor-orders/instructor-orders.component';
 import { InstructorReviewsComponent } from './instructor-reviews/instructor-reviews.component';
-import { InstructorProfileComponent } from './instructor-profile/instructor-profile.component';
 import { InstructorNotificationComponent } from './instructor-notification/instructor-notification.component';
 import { InstructorEditComponent } from './instructor-edit/instructor-edit.component';
 import { InstructorChatComponent } from './instructor-chat/instructor-chat.component';
@@ -27,6 +26,9 @@ import { RouterModule } from '@angular/router';
 import { InstructorQuizDetailsComponent } from './instructor-quiz-details/instructor-quiz-details.component';
 import { InstructorEnrolledCourseComponent } from './instructor-enrolled-course/instructor-enrolled-course.component';
 import { SharedModule } from 'src/app/shared/module/shared.module';
+import {InstructorPfeDetailsComponent} from "./instructor-pfe-details/instructor-pfe-details.component";
+import {InstructorSujetDetails} from "./sujet-details/instructor-sujet-details";
+import {CommentSectionComponent} from "./comment-section/comment-section.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     InstructorTicketsComponent,
     InstructorOrdersComponent,
     InstructorReviewsComponent,
-    InstructorProfileComponent,
+    InstructorSujetDetails,
     InstructorNotificationComponent,
     InstructorEditComponent,
     InstructorChatComponent,
@@ -52,6 +54,8 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     SujetpfeBackofficeComponent,
     InstructorQuizDetailsComponent,
     InstructorEnrolledCourseComponent,
+    InstructorPfeDetailsComponent,
+    CommentSectionComponent
   ],
   imports: [
     CommonModule,
@@ -60,5 +64,8 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     RouterModule,
     SharedModule,
   ],
+  exports: [
+    CommentSectionComponent
+  ]
 })
 export class InstructorModule { }

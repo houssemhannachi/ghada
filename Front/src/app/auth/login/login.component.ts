@@ -61,13 +61,13 @@ export class LoginComponent {
         // 🔹 Redirection en fonction du rôle
         switch (response.role) {
           case 'ADMIN':
-            this.router.navigate(['/instructor/instructor-dashboard']);
+            this.router.navigate(['/admin/admin-dashboard']);
             break;
           case 'MODERATOR':
-            this.router.navigate(['/home-three']); // Change selon ta page modérateur
+            this.router.navigate(['/instructor/instructor-dashboard']); // Change selon ta page modérateur
             break;
           default:
-            this.router.navigate(['/home-four']); // Page par défaut des utilisateurs normaux
+            this.router.navigate(['/student/student-dashboard']); // Page par défaut des utilisateurs normaux
             break;
         }
 

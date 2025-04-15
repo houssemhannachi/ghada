@@ -5,6 +5,7 @@ import com.phegondev.usersmanagementsystem.entity.OurUsers;
 import com.phegondev.usersmanagementsystem.entity.SujetPfe;
 import com.phegondev.usersmanagementsystem.repository.SujetPfeRepo;
 import com.phegondev.usersmanagementsystem.repository.UsersRepo;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,6 +120,15 @@ public class SujetPfeService implements ISujetPfeService {
         sujetPfe.setUserAttribue(user);
         sujetPfe.getDemandeurs().remove(user);
 
+        // 🔥 Supprimer toutes les autres demandes de ce user
+        List<SujetPfe> allSujetsWithUserAsDemandeur = sujetPfeRepository.findAllByDemandeursContains(user);
+        for (SujetPfe s : allSujetsWithUserAsDemandeur) {
+            if (!s.getId().equals(sujetPfeId)) {
+                s.getDemandeurs().remove(user);
+                sujetPfeRepository.save(s);
+            }
+        }
+
         SujetPfe updatedSujet = sujetPfeRepository.save(sujetPfe);
         System.out.println("✅ Postulation acceptée pour : " + updatedSujet.getTitre());
         return updatedSujet;
@@ -186,6 +196,10 @@ public class SujetPfeService implements ISujetPfeService {
     }
 
 
-
-
+    public Boolean couldPostulate(Integer userId) {
+        return sujetPfeRepository.findSujetPfeByUserAttribue_Id(userId).isEmpty();
+    }
+    public Optional<OurUsers> studentByPfe(Integer pfeId){
+        return sujetPfeRepository.findUserAttribueBySujetPfeId(pfeId);
+    }
 }

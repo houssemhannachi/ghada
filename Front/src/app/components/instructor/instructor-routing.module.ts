@@ -18,10 +18,10 @@ import { SujetpfeBackofficeComponent } from './sujetpfe-backoffice/sujetpfe-back
 import { InstructorDashboardComponent } from './instructor-dashboard/instructor-dashboard.component';
 import { InstructorEarningsComponent } from './instructor-earnings/instructor-earnings.component';
 import { InstructorNotificationComponent } from './instructor-notification/instructor-notification.component';
-import { InstructorProfileComponent } from './instructor-profile/instructor-profile.component';
 import { InstructorReviewsComponent } from './instructor-reviews/instructor-reviews.component';
 import { InstructorEditComponent } from './instructor-edit/instructor-edit.component';
 import { InstructorQuizDetailsComponent } from './instructor-quiz-details/instructor-quiz-details.component';
+import {InstructorSujetDetails} from "./sujet-details/instructor-sujet-details";
 
 const routes: Routes = [
   {
@@ -54,7 +54,7 @@ const routes: Routes = [
       },
       {
         path: 'sujet-details/:id',
-        component: InstructorProfileComponent,
+        component: InstructorSujetDetails,
       },
       {
         path: 'instructor-reviews',
