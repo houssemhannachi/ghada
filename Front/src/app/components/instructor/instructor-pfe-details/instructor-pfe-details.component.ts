@@ -4,13 +4,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SujetPfeService} from "../../../shared/service/sujetpfe/sujetpfe.service";
 import {ToastrService} from "ngx-toastr";
 import {OurUsers} from "../../../models/users";
-import {InstructorSidebarModule} from "../../instructor/common/instructor-sidebar/instructor-sidebar.module";
-import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'instructor-pfe-details',
   templateUrl: './instructor-pfe-details.component.html',
-  styleUrl: './instructor-pfe-details.component.scss'
+  styleUrls: ['./instructor-pfe-details.component.scss']
 })
 export class InstructorPfeDetailsComponent implements OnInit{
   sujetPfe!: SujetPfe;

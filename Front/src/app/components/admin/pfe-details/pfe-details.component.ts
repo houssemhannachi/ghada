@@ -4,15 +4,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SujetPfeService} from "../../../shared/service/sujetpfe/sujetpfe.service";
 import {ToastrService} from "ngx-toastr";
 import {OurUsers} from "../../../models/users";
-import {InstructorSidebarModule} from "../../instructor/common/instructor-sidebar/instructor-sidebar.module";
-import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-pfe-details',
   templateUrl: './pfe-details.component.html',
-  styleUrl: './instructor-pfe-details.component.scss'
+  styleUrls: ['./pfe-details.component.scss']
 })
-export class PfeDetailsComponent implements OnInit{
+export class PfeDetailsComponent implements OnInit {
   sujetPfe!: SujetPfe;
 
   constructor(
@@ -20,7 +18,8 @@ export class PfeDetailsComponent implements OnInit{
     private router: Router,
     private sujetPfeService: SujetPfeService,
     private toastr: ToastrService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const sujetId = this.route.snapshot.paramMap.get('id');
